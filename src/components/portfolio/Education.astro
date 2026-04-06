@@ -1,0 +1,52 @@
+---
+const education = {
+  degree: "Technologist in Systems Analysis",
+  institution: "Tena Higher Technological Institute",
+  date: "2021 - 2024"
+};
+
+const languages = [
+  { name: "Spanish", level: "Native" },
+  { name: "English", level: "Basic-Limited" }
+];
+
+const additionalInfo = [
+  "Strong interest in Artificial Intelligence integration for software development and workflow optimization",
+  "Focus on clean code, maintainability, and scalable system design",
+  "Continuous learner in software engineering, architecture, and emerging technologies",
+  "Experience promoting technology education and digital literacy across diverse audiences"
+];
+---
+
+<section id="education" class="section">
+  <h2 class="section-title reveal">Education</h2>
+  <div class="education-card reveal">
+    <div class="edu-header">
+      <span class="edu-icon">🎓</span>
+      <div>
+        <h4>{education.degree}</h4>
+        <p class="edu-institution">{education.institution}</p>
+      </div>
+    </div>
+    <span class="edu-date">{education.date}</span>
+  </div>
+
+  <div class="languages-card reveal">
+    <h4 class="languages-title">Languages</h4>
+    <div class="languages-grid">
+      {languages.map(lang => (
+        <div class="language-item">
+          <span class="lang-name">{lang.name}</span>
+          <span class="lang-level">{lang.level}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="additional-info reveal">
+    <h4 class="info-title">Additional Information</h4>
+    <ul class="info-list">
+      {additionalInfo.map(info => <li>{info}</li>)}
+    </ul>
+  </div>
+</section>

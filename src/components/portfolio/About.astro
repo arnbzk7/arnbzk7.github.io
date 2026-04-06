@@ -1,0 +1,28 @@
+---
+const aboutText = [
+  "Junior Full Stack Developer with hands-on experience in developing web and mobile applications using .NET (C#), Flutter, and SQL-based systems. Possesses a strong understanding of the complete software development lifecycle, including API design, database management, and modern frontend technologies.",
+  "Experienced in developing real-world solutions through freelance projects, including a scalable GPS tracking system and a fully customized e-commerce platform. Capable of working independently, managing development processes, and delivering functional, business-oriented systems.",
+  "Highly motivated to advance into senior software engineering roles, with a focus on continuous learning, emerging technologies, and AI-driven development."
+];
+
+const stats = [
+  { number: "4+", label: "Completed Projects" },
+  { number: "1+", label: "Years of Experience" },
+  { number: "7+", label: "Technologies" }
+];
+---
+
+<section id="about" class="section">
+  <h2 class="section-title reveal">About Me</h2>
+  <div class="about-content reveal">
+    {aboutText.map(text => <p>{text}</p>)}
+  </div>
+  <div class="stats-grid reveal">
+    {stats.map(stat => (
+      <div class="stat-item">
+        <span class="stat-number">{stat.number}</span>
+        <span class="stat-label">{stat.label}</span>
+      </div>
+    ))}
+  </div>
+</section>

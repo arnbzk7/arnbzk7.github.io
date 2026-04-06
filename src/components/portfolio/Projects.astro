@@ -1,0 +1,70 @@
+---
+const projects = [
+  {
+    icon: "📍",
+    title: "GPS Tracking System",
+    description: "Developed a scalable GPS tracking system with real-time monitoring, alerts, route history, and live map visualization. Implemented a multi-process, high-availability architecture supporting thousands of concurrent users. Built cross-platform web and mobile apps using Flutter, with a C# backend powered by ABP Framework. Designed a fault-tolerant system isolating user-level failures without impacting overall performance.",
+    tags: ["Flutter", "C#", "ABP Framework"],
+    link: "#",
+    linkType: "GitHub"
+  },
+  {
+    icon: "🛍️",
+    title: "Kyomu Space",
+    description: "Built a custom e-commerce platform for a Colombian women-focused store with full product catalog, user profiles, and shopping cart functionality. Designed an advanced UI/UX and integrated the Nequi payment gateway for secure, seamless transactions. Delivered a complete end-to-end shopping experience from browsing to checkout.",
+    tags: ["WordPress", "Nequi API"],
+    link: "#",
+    linkType: "Visit"
+  },
+  {
+    icon: "💻",
+    title: "EduCode",
+    description: "Developed a native Android application for structured programming education. Designed core concept modules with interactive assessments to accelerate learning. Implemented guided paths, hands-on exercises, and progress tracking. Enabled scalable, measurable skill development in software fundamentals.",
+    tags: ["Flutter", "Android"],
+    link: "#",
+    linkType: "Visit"
+  },
+  {
+    icon: "🎮",
+    title: "System Overload Bit",
+    description: "Developed a 2D simulation game combining evasion and precision mechanics with hybrid controls (keyboard and mouse). Designed a reactive environment where players dodge stochastic entities and capture targets under time pressure. Implemented algorithmic logic to handle randomness and dynamic gameplay behavior. Focused on precision, performance, and responsive game mechanics.",
+    tags: ["Python", "Pygame"],
+    link: "#",
+    linkType: "GitHub"
+  }
+];
+---
+
+<section id="projects" class="section">
+  <h2 class="section-title reveal">Projects</h2>
+  <div class="projects-grid">
+    {projects.map(project => (
+      <div class="project-card reveal">
+        <div class="project-header">
+          <span class="project-icon">{project.icon}</span>
+          <h4>{project.title}</h4>
+        </div>
+        <p class="project-desc">{project.description}</p>
+        <div class="project-tags">
+          {project.tags.map(tag => <span>{tag}</span>)}
+        </div>
+        <div class="project-links">
+          <a href={project.link} class="project-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              {project.linkType === "GitHub" ? (
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+              ) : (
+                <>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </>
+              )}
+            </svg>
+            {project.linkType}
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

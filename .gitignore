@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+
+# Salida de construcción (Build output)
+dist/
+_site/
+
+# Archivos generados por Astro
+.astro/
+env.d.ts
+
+# Logs de paquetes
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Variables de entorno (Sensible)
+.env
+.env.production
+.env*.local
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.code-workspace
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

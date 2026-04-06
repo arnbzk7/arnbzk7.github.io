@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Futuristic Portfolio | Geovanny Peñaloza">
+  <main>
+    <section class="hero">
+      <div class="grid-bg"></div>
+      <div class="content">
+        <h1 class="glitch" data-text="GEOVANNY">
+          <span class="line1">GEOVANNY</span>
+          <span class="line2">PEÑALOZA</span>
+        </h1>
+        <p class="subtitle">Desarrollador Full Stack & Creador Digital</p>
+        <div class="cta-container">
+          <a href="/portfolio" class="cyber-btn disintegrate">
+            <span class="btn-text">Portafolio</span>
+            <span class="btn-glitch"></span>
+          </a>
+          <a href="/sobre-mi" class="cyber-btn secondary color-shift">
+            <span class="btn-text">Sobre mí</span>
+          </a>
+          <button class="cyber-btn green">
+            <span class="btn-text">Siguiente</span>
+          </button>
+        </div>
+      </div>
+      <div class="particles">
+        <canvas id="particleCanvas"></canvas>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  @import '../styles/global.css';
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+  }
+
+  .content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    color: var(--color-primary);
+    text-shadow: 
+      0 0 10px var(--color-primary),
+      0 0 40px var(--color-primary),
+      0 0 80px var(--color-accent);
+    animation: flicker 3s infinite;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+
+  h1 .line1,
+  h1 .line2 {
+    display: block;
+    margin: 0;
+  }
+
+  h1 .line2 {
+    color: var(--color-secondary);
+    text-shadow: 
+      0 0 10px var(--color-secondary),
+      0 0 40px var(--color-secondary),
+      0 0 80px var(--color-accent);
+    margin-top: 0.2em;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.8; }
+    94% { opacity: 1; }
+    96% { opacity: 0.9; }
+    97% { opacity: 1; }
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 2rem 0;
+    text-transform: uppercase;
+  }
+
+  .cta-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .cyber-btn {
+    padding: 1rem 3rem;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .cyber-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: 0 0 30px var(--color-primary);
+  }
+
+  .cyber-btn.secondary {
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+  }
+
+  .cyber-btn.secondary:hover {
+    background: var(--color-secondary);
+    color: var(--color-bg);
+    box-shadow: 0 0 30px var(--color-secondary);
+  }
+
+  .cyber-btn.green {
+    color: #00ff88;
+    border-color: #00ff88;
+  }
+
+  .cyber-btn.green:hover {
+    background: #00ff88;
+    color: var(--color-bg);
+    box-shadow: 0 0 30px #00ff88;
+  }
+
+  .particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  
+  const canvas = document.getElementById('particleCanvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+  
+  if (ctx) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const particles: { x: number; y: number; vx: number; vy: number; size: number }[] = [];
+    const particleCount = 100;
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1
+      });
+    }
+    
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 243, 255, 0.5)';
+        ctx.fill();
+        
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(0, 243, 255, ${0.15 * (1 - dist / 150)})`;
+            ctx.stroke();
+          }
+        }
+      });
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+  }
+  
+  gsap.from('.content > *', {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.2,
+    ease: 'power3.out'
+  });
+
+  const disintegrateBtn = document.querySelector('.disintegrate') as HTMLAnchorElement;
+  
+  disintegrateBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const content = document.querySelector('.content');
+    const particles = document.getElementById('particleCanvas');
+    
+    const chars = content?.querySelectorAll('h1, .subtitle, .cta-container');
+    
+    gsap.to(chars, {
+      duration: 0.8,
+      scale: 1.5,
+      opacity: 0,
+      filter: 'blur(20px)',
+      stagger: 0.1,
+      ease: 'power2.in',
+      onComplete: () => {
+        window.location.href = '/portfolio';
+      }
+    });
+
+    if (particles) {
+      gsap.to(particles, {
+        duration: 0.5,
+        opacity: 0,
+        scale: 2,
+        ease: 'power2.in'
+      });
+    }
+  });
+
+  const colorShiftBtn = document.querySelector('.color-shift') as HTMLAnchorElement;
+  
+  colorShiftBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const colors = [
+      'rgba(0, 243, 255, 0.1)',
+      'rgba(255, 0, 255, 0.1)',
+      'rgba(112, 0, 255, 0.1)',
+      'rgba(0, 255, 136, 0.1)'
+    ];
+    const hero = document.querySelector('.hero') as HTMLElement;
+    
+    let counter = 0;
+    let delay = 200;
+    
+    const interval = setInterval(() => {
+      hero.style.background = colors[counter % colors.length];
+      counter++;
+      
+      if (counter > 4) {
+        delay = 100;
+      }
+      if (counter > 6) {
+        delay = 50;
+      }
+      if (counter > 8) {
+        clearInterval(interval);
+        window.location.href = '/sobre-mi';
+      }
+    }, delay);
+  });
+</script>

@@ -1,0 +1,51 @@
+---
+const experiences = [
+  {
+    date: "Nov 2025 - Present",
+    title: "Full Stack Developer",
+    company: "Freelance - Ecuador",
+    description: "Designed and developed real-world software solutions including a scalable GPS tracking system with real-time monitoring, alerts, route history, and live map visualization. Built cross-platform mobile and web applications using Flutter, and contributed to backend development with C# and ABP Framework. Implemented queue-based, multi-process architectures to handle high concurrency and ensure fault tolerance. Developed a custom e-commerce platform with advanced UI/UX and integrated Nequi payment system."
+  },
+  {
+    date: "Aug 2024 - Nov 2024",
+    title: "IT Support & Systems Intern",
+    company: "Ikiam Amazonian Regional University - Ecuador",
+    description: "Managed servers, databases, and internal systems within the IT department. Performed OS installations (Linux/Windows) and system maintenance. Executed SQL-based database tasks and supported infrastructure operations, ensuring system reliability and operational continuity across the university's technology infrastructure."
+  },
+  {
+    date: "Feb 2024 - Aug 2024",
+    title: "IT & Systems Intern",
+    company: "Tena Higher Technological Institute - Ecuador",
+    description: "Supported deployment of an academic management system for institutional use. Identified and resolved system issues through bug fixing and validation processes. Created comprehensive technical documentation and user manuals to support system adoption and streamline operational workflows."
+  },
+  {
+    date: "Feb 2022 - Aug 2022",
+    title: "IT Support Intern",
+    company: "Archidona Municipal Government - Ecuador",
+    description: "Implemented and maintained an internal messaging system for institutional communication. Managed system functionality across Windows environments with Linux-based backend infrastructure. Ensured system stability and operational continuity, supporting daily municipal operations and digital transformation initiatives."
+  },
+  {
+    date: "Sep 2021 - Dec 2021",
+    title: "IT Systems Intern",
+    company: "Institute of Popular and Solidarity Economy - Ecuador",
+    description: "Assisted in system management and internal technical operations. Supported workflow organization and system usage across departments. Delivered digital literacy training to older adults, promoting technology adoption and building confidence in digital tools among diverse audiences."
+  }
+];
+---
+
+<section id="experience" class="section">
+  <h2 class="section-title reveal">Experience</h2>
+  <div class="timeline">
+    {experiences.map(exp => (
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">{exp.date}</span>
+          <h4>{exp.title}</h4>
+          <p class="timeline-company">{exp.company}</p>
+          <p class="timeline-desc">{exp.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
