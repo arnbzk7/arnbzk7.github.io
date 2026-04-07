@@ -4,8 +4,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="Futuristic Portfolio | Geovanny Peñaloza">
   <main>
-    <section class="hero">
+    <section class="hero" data-theme="light">
+      <button class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
       <div class="grid-bg"></div>
+
       <div class="content">
         <h1 class="glitch" data-text="GEOVANNY">
           <span class="line1">GEOVANNY</span>
@@ -17,12 +27,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span class="btn-text">Portafolio</span>
             <span class="btn-glitch"></span>
           </a>
-          <a href="/sobre-mi" class="cyber-btn secondary color-shift">
-            <span class="btn-text">Sobre mí</span>
-          </a>
-          <button class="cyber-btn green">
-            <span class="btn-text">Siguiente</span>
-          </button>
         </div>
       </div>
       <div class="particles">
@@ -35,6 +39,66 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <style>
   @import '../styles/global.css';
 
+  :root {
+    --color-bg: #0a1628;
+    --color-primary: #00d4ff;
+    --color-secondary: #9d4edd;
+    --text-main: #ffffff;
+    --font-mono: 'Courier New', monospace;
+  }
+
+  [data-theme="dark"] {
+    --color-bg: #1a0a2e;
+    --color-primary: #9d4edd;
+    --color-secondary: #00d4ff;
+    --text-main: #ffffff;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--text-main);
+    overflow-x: hidden;
+    font-family: var(--font-mono);
+  }
+
+  .theme-toggle {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 100;
+    background: var(--bg-secondary, rgba(0, 212, 255, 0.1));
+    border: 1px solid var(--color-primary);
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--color-primary);
+  }
+
+  [data-theme="dark"] .theme-toggle {
+    background: rgba(157, 78, 221, 0.15);
+    border-color: rgba(157, 78, 221, 0.5);
+    color: #9d4edd;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+  }
+
+  [data-theme="dark"] .theme-toggle:hover {
+    border-color: #9d4edd;
+    box-shadow: 0 0 0 4px rgba(157, 78, 221, 0.2);
+  }
+
+  .moon-icon { display: none; }
+  [data-theme="dark"] .sun-icon { display: none; }
+  [data-theme="dark"] .moon-icon { display: block; }
+
   .hero {
     min-height: 100vh;
     display: flex;
@@ -42,16 +106,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     justify-content: center;
     position: relative;
     overflow: hidden;
+    background: var(--color-bg);
   }
 
   .grid-bg {
     position: absolute;
     inset: 0;
     background-image: 
-      linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     animation: gridMove 20s linear infinite;
+  }
+
+  [data-theme="dark"] .grid-bg {
+    background-image: 
+      linear-gradient(rgba(157, 78, 221, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(157, 78, 221, 0.05) 1px, transparent 1px);
   }
 
   @keyframes gridMove {
@@ -66,51 +137,42 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   h1 {
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-weight: 900;
-    letter-spacing: 0.3em;
-    color: var(--color-primary);
-    text-shadow: 
-      0 0 10px var(--color-primary),
-      0 0 40px var(--color-primary),
-      0 0 80px var(--color-accent);
-    animation: flicker 3s infinite;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: var(--text-main);
+    text-shadow: 4px 4px 8px rgba(0, 20, 40, 0.8);
     position: relative;
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
+    display: block;
+    text-align: center;
+    line-height: 1.1;
+    text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
   }
-
+ 
   h1 .line1,
   h1 .line2 {
-    display: block;
+    display: inline;
     margin: 0;
+    color: var(--text-main);
   }
-
+ 
   h1 .line2 {
-    color: var(--color-secondary);
-    text-shadow: 
-      0 0 10px var(--color-secondary),
-      0 0 40px var(--color-secondary),
-      0 0 80px var(--color-accent);
-    margin-top: 0.2em;
-  }
-
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    92% { opacity: 1; }
-    93% { opacity: 0.8; }
-    94% { opacity: 1; }
-    96% { opacity: 0.9; }
-    97% { opacity: 1; }
+    text-shadow: 4px 4px 8px rgba(0, 20, 40, 0.8);
+    margin-top: 0;
+    margin-left: 0.2em;
   }
 
   .subtitle {
     font-size: clamp(1rem, 3vw, 1.5rem);
-    letter-spacing: 0.3em;
-    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.2em;
+    color: var(--text-main);
     margin: 2rem 0;
     text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .cta-container {
@@ -127,8 +189,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 1rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    background: transparent;
-    color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-bg);
     border: 2px solid var(--color-primary);
     position: relative;
     cursor: pointer;
@@ -136,34 +198,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
     text-decoration: none;
     display: inline-block;
+    font-weight: bold;
   }
 
   .cyber-btn:hover {
-    background: var(--color-primary);
-    color: var(--color-bg);
+    background: var(--color-bg);
+    color: var(--color-primary);
     box-shadow: 0 0 30px var(--color-primary);
-  }
-
-  .cyber-btn.secondary {
-    color: var(--color-secondary);
-    border-color: var(--color-secondary);
-  }
-
-  .cyber-btn.secondary:hover {
-    background: var(--color-secondary);
-    color: var(--color-bg);
-    box-shadow: 0 0 30px var(--color-secondary);
-  }
-
-  .cyber-btn.green {
-    color: #00ff88;
-    border-color: #00ff88;
-  }
-
-  .cyber-btn.green:hover {
-    background: #00ff88;
-    color: var(--color-bg);
-    box-shadow: 0 0 30px #00ff88;
   }
 
   .particles {
@@ -180,79 +221,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <script>
   import gsap from 'gsap';
-  
-  const canvas = document.getElementById('particleCanvas') as HTMLCanvasElement;
-  const ctx = canvas.getContext('2d');
-  
-  if (ctx) {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    const particles: { x: number; y: number; vx: number; vy: number; size: number }[] = [];
-    const particleCount = 100;
-    
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1
-      });
-    }
-    
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particles.forEach((p, i) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-        
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 243, 255, 0.5)';
-        ctx.fill();
-        
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(0, 243, 255, ${0.15 * (1 - dist / 150)})`;
-            ctx.stroke();
-          }
-        }
-      });
-      
-      requestAnimationFrame(animate);
-    }
-    
-    animate();
-  }
-  
-  gsap.from('.content > *', {
-    y: 50,
-    opacity: 0,
-    duration: 1,
-    stagger: 0.2,
-    ease: 'power3.out'
+
+  const hero = document.querySelector('.hero') as HTMLElement;
+  const toggleTheme = document.querySelector('.theme-toggle') as HTMLButtonElement;
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  hero.dataset.theme = savedTheme;
+
+  toggleTheme?.addEventListener('click', () => {
+    const currentTheme = hero.dataset.theme;
+    hero.dataset.theme = currentTheme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', hero.dataset.theme as string);
   });
 
   const disintegrateBtn = document.querySelector('.disintegrate') as HTMLAnchorElement;
-  
-  disintegrateBtn.addEventListener('click', (e) => {
+  disintegrateBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     const content = document.querySelector('.content');
     const particles = document.getElementById('particleCanvas');
-    
     const chars = content?.querySelectorAll('h1, .subtitle, .cta-container');
     
     gsap.to(chars, {
@@ -277,35 +262,55 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
   });
 
-  const colorShiftBtn = document.querySelector('.color-shift') as HTMLAnchorElement;
-  
-  colorShiftBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const colors = [
-      'rgba(0, 243, 255, 0.1)',
-      'rgba(255, 0, 255, 0.1)',
-      'rgba(112, 0, 255, 0.1)',
-      'rgba(0, 255, 136, 0.1)'
-    ];
-    const hero = document.querySelector('.hero') as HTMLElement;
-    
-    let counter = 0;
-    let delay = 200;
-    
-    const interval = setInterval(() => {
-      hero.style.background = colors[counter % colors.length];
-      counter++;
-      
-      if (counter > 4) {
-        delay = 100;
-      }
-      if (counter > 6) {
-        delay = 50;
-      }
-      if (counter > 8) {
-        clearInterval(interval);
-        window.location.href = '/sobre-mi';
-      }
-    }, delay);
+  const canvas = document.getElementById('particleCanvas') as HTMLCanvasElement;
+  const ctx = canvas?.getContext('2d');
+  if (ctx) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const particles: { x: number; y: number; vx: number; vy: number; size: number }[] = [];
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1
+      });
+    }
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || '#00d4ff';
+      const rgb = primaryColor.replace('#', '').match(/.{2}/g)?.map(x => parseInt(x, 16)).join(', ') || '0, 212, 255';
+      particles.forEach((p, i) => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = primaryColor;
+        ctx.fill();
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.sqrt((p.x - p2.x)**2 + (p.y - p2.y)**2);
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(${rgb}, ${0.15 * (1 - dist / 150)})`;
+            ctx.stroke();
+          }
+        }
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  gsap.from('.content > *', {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.2,
+    ease: 'power3.out'
   });
 </script>

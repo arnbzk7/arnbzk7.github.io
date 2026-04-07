@@ -3,16 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #050505;
-  --color-primary: #00f3ff; /* Cyber Blue */
-  --color-secondary: #ff00ff; /* Cyber Pink */
-  --color-accent: #7000ff; /* Deep Purple */
+  --color-bg: #0a1628;
+  --color-primary: #00d4ff; 
+  --color-secondary: #ff00ff;
+  --color-accent: #00d4ff;
+  --text-main: #ffffff;
   --font-mono: 'Courier New', monospace;
 }
 
 body {
   background-color: var(--color-bg);
-  color: white;
+  color: var(--text-main);
   overflow-x: hidden;
   font-family: var(--font-mono);
 }
