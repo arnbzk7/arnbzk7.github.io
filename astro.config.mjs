@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@astrojs/tailwind';
 
-// https://astro.build/config
 export default defineConfig({
+  site: 'https://arnbzk7.github.io',
   integrations: [tailwindcss()],
 });
